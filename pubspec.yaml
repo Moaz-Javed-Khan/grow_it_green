@@ -17,7 +17,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_native_splash: ^2.2.16
 
   lint: ^2.0.1
 
@@ -26,10 +25,3 @@ flutter:
 
 assets:
   - assets/images/
-
-flutter_native_splash:
-  color: "#FFFFFF"
-  image: "logo.png"
-  android12:
-    color: "#FFFFFF"
-    image: "logo.png"
