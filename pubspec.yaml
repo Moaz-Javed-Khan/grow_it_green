@@ -1,0 +1,35 @@
+name: grow_it_green
+description: An app to help with gardening.
+publish_to: 'none'
+version: 0.0.1+1
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  cache:
+    path: packages/cache
+  equatable: ^2.0.5
+  flutter:
+    sdk: flutter
+  http: ^0.13.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_native_splash: ^2.2.16
+
+  lint: ^2.0.1
+
+flutter:
+  uses-material-design: true
+
+assets:
+  - assets/images/
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: "logo.png"
+  android12:
+    color: "#FFFFFF"
+    image: "logo.png"
