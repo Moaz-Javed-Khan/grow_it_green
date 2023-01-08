@@ -1,5 +1,5 @@
 class AppConstants {
   const AppConstants._();
 
-  static const int a = 1;
+  static const onboardingCache = "onboardingCache";
 }

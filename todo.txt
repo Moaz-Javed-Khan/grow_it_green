@@ -1,5 +1,10 @@
-Splash Screen (Done)
+TODO:
 App icon
-App.dart file
 theme
 login
+onboarding remainging
+
+
+Done:
+Splash Screen (Done)
+App.dart file (Done)

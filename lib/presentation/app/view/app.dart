@@ -35,7 +35,74 @@ class AppView extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // theme: ,
-      home: Container(),
+      home: Consumer<AppProvider>(
+        builder: (context, provider, child) {
+          if (provider.onboardingStatus == OnboardingStatus.notOnboarded ||
+              provider.onboardingStatus == OnboardingStatus.unknown) {
+            return const Onboarding();
+          } else if (provider.authStatus == AuthStatus.unauthenticated ||
+              provider.authStatus == AuthStatus.unknown) {
+            return const LoginPage();
+          } else if (provider.authStatus == AuthStatus.authenticated) {
+            return const HomePage();
+          } else {
+            return const SizedBox();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Center(child: Text("Home")),
+        TextButton(
+          onPressed: () => context.read<AppProvider>().logout(),
+          child: const Text("Logout"),
+        ),
+      ],
+    );
+  }
+}
+
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Center(child: Text("Login Here")),
+        TextButton(
+          onPressed: () => context.read<AppProvider>().login(),
+          child: const Text("Login"),
+        )
+      ],
+    );
+  }
+}
+
+class Onboarding extends StatelessWidget {
+  const Onboarding({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          const Text("Onboarding"),
+          TextButton(
+            onPressed: () => context.read<AppProvider>().onboardingCompleted(),
+            child: const Text("Get Started"),
+          ),
+        ],
+      ),
     );
   }
 }
