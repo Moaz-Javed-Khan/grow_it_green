@@ -1,10 +1,17 @@
+provider (extention methode and consumer) 
+
+formz (bloc hero to zero)
+
+
+
 TODO:
 App icon
 theme
-login
-onboarding remainging
+
 
 
 Done:
 Splash Screen (Done)
 App.dart file (Done)
+login (Done)
+onboarding remainging (Done)

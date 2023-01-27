@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cache/cache.dart';
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/_common/constants/constants.dart';
-import 'package:grow_it_green/repository/auth_repository/repository.dart';
+import 'package:grow_it_green/domain/auth_repository/repository.dart';
 
 enum OnboardingStatus { unknown, onboarded, notOnboarded }
 
@@ -26,6 +26,7 @@ class AppProvider extends ChangeNotifier {
   final AuthRepository _authRepository;
   late final StreamSubscription<User> _userSubscription;
 
+  // State Variables
   OnboardingStatus onboardingStatus = OnboardingStatus.unknown;
   AuthStatus authStatus = AuthStatus.unknown;
   User user = User.empty;

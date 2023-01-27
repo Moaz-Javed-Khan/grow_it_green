@@ -33,4 +33,19 @@ class AuthRepositoryImpl extends AuthRepository {
       throw LogOutFailure();
     }
   }
+
+  @override
+  Future<void> signUp({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await api.signUp(
+        email: email,
+        password: password,
+      );
+    } on CustomException catch (e) {
+      throw RegisterFailure(e.message);
+    }
+  }
 }

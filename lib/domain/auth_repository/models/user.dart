@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:grow_it_green/api/auth_api/entities/entities.dart';
+import 'package:grow_it_green/data/auth_api/entities/entities.dart';
 
 class User extends Equatable {
   const User({

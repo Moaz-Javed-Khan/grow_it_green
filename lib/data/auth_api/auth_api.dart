@@ -8,6 +8,22 @@ class AuthApiImpl extends AuthApi {
   final APIClient _client;
 
   @override
+  Future<void> signUp({
+    required String email,
+    required String password,
+  }) async {
+    await _client.post(
+      baseUrl: AuthEndpoints.signUpBaseUrl,
+      handle: '${AuthEndpoints.signUp}?key=${AppConstants.firebaseAPIKey}',
+      body: {
+        'email': email,
+        'password': password,
+        'returnSecureToken': true,
+      },
+    );
+  }
+
+  @override
   Future<UserEntity> login({
     required String email,
     required String password,
@@ -30,4 +46,6 @@ class AuthApiImpl extends AuthApi {
 
     return UserEntity.fromJson(response as Map<String, dynamic>);
   }
+
+  // key=[API_KEY]
 }

@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:cache/cache.dart';
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/_common/helpers/custom_exception.dart';
-import 'package:grow_it_green/api/auth_api/api.dart';
-import 'package:grow_it_green/repository/auth_repository/models/models.dart';
+import 'package:grow_it_green/data/auth_api/api.dart';
+import 'package:grow_it_green/domain/auth_repository/models/models.dart';
 
 export 'models/models.dart';
 
@@ -75,6 +75,14 @@ abstract class AuthRepository {
   ///
   /// Throws a [LoginFailure] if an exception occurs.
   Future<void> login({
+    required String email,
+    required String password,
+  });
+
+  /// Signs up with the provided [email] and [password].
+  ///
+  /// Throws a [RegisterFailure] if an exception occurs.
+  Future<void> signUp({
     required String email,
     required String password,
   });

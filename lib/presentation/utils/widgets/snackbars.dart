@@ -30,3 +30,19 @@ class _Snackbar {
     );
   }
 }
+
+extension SnackbarContext on BuildContext {
+  ScaffoldMessengerState successSnackbar(String text) =>
+      ScaffoldMessenger.of(this)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(Snackbars.success(text));
+
+  ScaffoldMessengerState errorSnackbar(String text) =>
+      ScaffoldMessenger.of(this)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(Snackbars.error(text));
+
+  ScaffoldMessengerState infoSnackbar(String text) => ScaffoldMessenger.of(this)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(Snackbars.info(text));
+}

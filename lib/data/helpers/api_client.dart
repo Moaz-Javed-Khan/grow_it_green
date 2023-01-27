@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:grow_it_green/api/helpers/api_config.dart';
-import 'package:grow_it_green/api/helpers/exception_model.dart';
-import 'package:grow_it_green/repository/auth_repository/repository.dart';
+import 'package:grow_it_green/data/helpers/api_config.dart';
+import 'package:grow_it_green/data/helpers/exception_model.dart';
+import 'package:grow_it_green/domain/auth_repository/repository.dart';
 import 'package:http/http.dart' as http;
 
 /// API Client to interact with any REST API
@@ -525,6 +525,13 @@ class APIClient {
 
   /// General HTTP code responses
   Future<Map<String, dynamic>> _response(http.Response response) async {
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final message = json['message'] == null
+        ? ((json['error'] as Map<String, dynamic>?)?['message'] as String?) ==
+                null
+            ? 'Unauthorized Request'
+            : (json['error'] as Map<String, dynamic>)['message'].toString()
+        : json['message'].toString();
     switch (response.statusCode) {
       case 200:
       case 201:
@@ -532,21 +539,12 @@ class APIClient {
         return responseJson;
       case 400:
       case 422:
-        throw BadRequestException(
-          (jsonDecode(response.body) as Map<String, dynamic>)['message']
-              as String?,
-        );
+        throw BadRequestException(message);
       case 401:
       case 403:
-        throw UnauthorizedException(
-          (jsonDecode(response.body) as Map<String, dynamic>)['message']
-              .toString(),
-        );
+        throw UnauthorizedException(message);
       case 404:
-        throw NotFoundException(
-          (jsonDecode(response.body) as Map<String, dynamic>)['message']
-              .toString(),
-        );
+        throw NotFoundException(message);
       case 500:
       default:
         throw FetchDataException(

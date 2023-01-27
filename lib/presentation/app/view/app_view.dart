@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:grow_it_green/api/helpers/api_client.dart';
+import 'package:grow_it_green/data/helpers/api_client.dart';
+import 'package:grow_it_green/domain/auth_repository/repository.dart';
 import 'package:grow_it_green/presentation/app/provider/app_provider.dart';
-import 'package:grow_it_green/repository/auth_repository/repository.dart';
+import 'package:grow_it_green/presentation/app/view/onboarding.dart';
+import 'package:grow_it_green/presentation/auth/sign_up/sign_up.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -39,11 +41,14 @@ class AppView extends StatelessWidget {
         builder: (context, provider, child) {
           if (provider.onboardingStatus == OnboardingStatus.notOnboarded ||
               provider.onboardingStatus == OnboardingStatus.unknown) {
+            // return const Onboarding();
             return const Onboarding();
           } else if (provider.authStatus == AuthStatus.unauthenticated ||
               provider.authStatus == AuthStatus.unknown) {
-            return const LoginPage();
+            // return const LoginPage();
+            return const SignUpView();
           } else if (provider.authStatus == AuthStatus.authenticated) {
+            // return const HomePage();
             return const HomePage();
           } else {
             return const SizedBox();
@@ -71,38 +76,38 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+// class LoginPage extends StatelessWidget {
+//   const LoginPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Center(child: Text("Login Here")),
-        TextButton(
-          onPressed: () => context.read<AppProvider>().login(),
-          child: const Text("Login"),
-        )
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         const Center(child: Text("Login Here")),
+//         TextButton(
+//           onPressed: () => context.read<AppProvider>().login(),
+//           child: const Text("Login"),
+//         )
+//       ],
+//     );
+//   }
+// }
 
-class Onboarding extends StatelessWidget {
-  const Onboarding({super.key});
+// class Onboarding extends StatelessWidget {
+//   const Onboarding({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          const Text("Onboarding"),
-          TextButton(
-            onPressed: () => context.read<AppProvider>().onboardingCompleted(),
-            child: const Text("Get Started"),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Column(
+//         children: [
+//           const Text("Onboarding"),
+//           TextButton(
+//             onPressed: () => context.read<AppProvider>().onboardingCompleted(),
+//             child: const Text("Get Started"),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
