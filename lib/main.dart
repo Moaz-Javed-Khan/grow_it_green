@@ -10,7 +10,8 @@ void main() async {
 
   await CacheClient.initializeCache();
 
-  APIConfig.baseUrl = '';
+  APIConfig.baseUrl =
+      'https://grow-it-green-default-rtdb.asia-southeast1.firebasedatabase.app';
 
   final authRepository = AuthRepositoryImpl();
 

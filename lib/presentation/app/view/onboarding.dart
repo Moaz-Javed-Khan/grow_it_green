@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/presentation/app/provider/app_provider.dart';
 import 'package:grow_it_green/presentation/app/view/onboardingContent.dart';
-import 'package:grow_it_green/presentation/app/view/signup_screen.dart';
+import 'package:grow_it_green/presentation/auth/sign_up/view/sign_up_view.dart';
 import 'package:provider/provider.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
+
+  static Route route() => MaterialPageRoute(
+        builder: (context) => const Onboarding(),
+      );
 
   @override
   State<Onboarding> createState() => _OnboardingState();
@@ -105,7 +109,7 @@ class _OnboardingState extends State<Onboarding> {
                     Navigator.push(
                       context,
                       // MaterialPageRoute(builder: (_) => const HomeScreen()),
-                      MaterialPageRoute(builder: (_) => const SignupScreen()),
+                      MaterialPageRoute(builder: (_) => const SignUpView()),
                     );
                   }
                   _controller.nextPage(

@@ -67,10 +67,6 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void login() {
-    _authRepository.login(email: "email", password: "password");
-  }
-
   void logout() {
     _authRepository.logOut();
   }

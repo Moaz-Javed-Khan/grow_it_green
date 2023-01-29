@@ -28,24 +28,16 @@ class AuthApiImpl extends AuthApi {
     required String email,
     required String password,
   }) async {
-    final response = {
-      'id': 12,
-      'name': "sdsad",
-      'email': "asdasd",
-      'phone': "asdasd",
-      'addressText': "asdasd",
-      'accessToken': "asdasdds",
-    };
-    // await _client.post(
-    //   handle: AuthEndpoints.login,
-    //   body: {
-    //     'email': email,
-    //     'password': password,
-    //   },
-    // );
+    final response = await _client.post(
+      baseUrl: AuthEndpoints.loginBaseUrl,
+      handle: '${AuthEndpoints.login}?key=${AppConstants.firebaseAPIKey}',
+      body: {
+        'email': email,
+        'password': password,
+        'returnSecureToken': true,
+      },
+    );
 
-    return UserEntity.fromJson(response as Map<String, dynamic>);
+    return UserEntity.fromJson(response);
   }
-
-  // key=[API_KEY]
 }

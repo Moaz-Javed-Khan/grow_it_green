@@ -4,8 +4,8 @@ import 'package:grow_it_green/domain/auth_repository/repository.dart';
 import 'package:grow_it_green/presentation/utils/validators/email.dart';
 import 'package:grow_it_green/presentation/utils/validators/password.dart';
 
-class SignUpProvider extends ChangeNotifier {
-  SignUpProvider({
+class LogInProvider extends ChangeNotifier {
+  LogInProvider({
     required AuthRepository authRepository,
   }) : _authRepository = authRepository;
 
@@ -29,13 +29,13 @@ class SignUpProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signUp() async {
+  Future<void> logIn() async {
     if (!formzStatus.isValidated) return;
     formzStatus = FormzStatus.submissionInProgress;
     notifyListeners();
 
     try {
-      await _authRepository.signUp(
+      await _authRepository.login(
         email: email.value,
         password: password.value,
       );

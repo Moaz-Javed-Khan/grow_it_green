@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:grow_it_green/domain/auth_repository/repository.dart';
-import 'package:grow_it_green/presentation/app/view/login_screen.dart';
+import 'package:grow_it_green/presentation/auth/log_in/log_in.dart';
 import 'package:grow_it_green/presentation/auth/sign_up/provider/sign_up_provider.dart';
 import 'package:grow_it_green/presentation/utils/widgets/snackbars.dart';
 import 'package:provider/provider.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
+
+  static Route route() =>
+      MaterialPageRoute(builder: (context) => const SignUpView());
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +42,12 @@ class _SignUpViewState extends State<_SignUpView> {
 
   void _onListen() {
     if (provider.formzStatus == FormzStatus.submissionFailure) {
-      context.errorSnackbar(provider.error ?? 'Something went wrong!asdsad');
+      context.errorSnackbar(provider.error ?? 'Something went wrong!');
     } else if (provider.formzStatus == FormzStatus.submissionSuccess) {
       context.successSnackbar(
         'Signed Up Successfully. Please login to continue.',
       );
-      Navigator.pushReplacement(context, LoginScreen.route());
+      Navigator.pushReplacement(context, LogInView.route());
     }
   }
 
@@ -66,11 +69,11 @@ class _SignUpViewState extends State<_SignUpView> {
                 child: Column(
                   children: [
                     const SizedBox(height: 50),
-                    // Image.asset(
-                    //   'assets/images/logo.png',
-                    //   fit: BoxFit.cover,
-                    //   height: constraints.maxHeight * 0.2,
-                    // ),
+                    Image.asset(
+                      'assets/images/logo.png',
+                      fit: BoxFit.cover,
+                      height: constraints.maxHeight * 0.2,
+                    ),
                     const SizedBox(height: 50),
                     // TextFormField(
                     //   validator: (value) {
@@ -117,7 +120,7 @@ class _SignUpViewState extends State<_SignUpView> {
                       onChanged: (value) =>
                           context.read<SignUpProvider>().emailChanged(value),
                     ),
-                    TextFormField(
+                    TextField(
                       decoration: InputDecoration(
                         labelText: 'Password',
                         errorText: provider.getPasswordError(),
@@ -160,10 +163,10 @@ class _SignUpViewState extends State<_SignUpView> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
+                                builder: (context) => const LogInView(),
                               ),
                             );
                           },
