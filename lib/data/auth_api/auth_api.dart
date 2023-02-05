@@ -38,6 +38,6 @@ class AuthApiImpl extends AuthApi {
       },
     );
 
-    return UserEntity.fromJson(response);
+    return UserEntity.fromJson(response as Map<String, dynamic>);
   }
 }

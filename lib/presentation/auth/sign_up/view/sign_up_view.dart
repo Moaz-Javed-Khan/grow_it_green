@@ -62,121 +62,127 @@ class _SignUpViewState extends State<_SignUpView> {
     return Scaffold(
       body: Consumer<SignUpProvider>(
         builder: (context, provider, _) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 50),
-                    Image.asset(
-                      'assets/images/logo.png',
-                      fit: BoxFit.cover,
-                      height: constraints.maxHeight * 0.2,
-                    ),
-                    const SizedBox(height: 50),
-                    // TextFormField(
-                    //   validator: (value) {
-                    //     if (value!.isEmpty ||
-                    //         !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                    //       return "Enter Name correctly";
-                    //     } else {
-                    //       return null;
-                    //     }
-                    //   },
-                    //   decoration: const InputDecoration(
-                    //     labelText: 'Full Name',
-                    //   ),
-                    //   // onChanged: (val) {
-                    //   //   titleInput = val;
-                    //   // },
-                    //   // controller: _usernameController,
-                    //   // onSubmitted: (_) => _submitData(),
-                    // ),
-                    // TextFormField(
-                    //   validator: (value) {
-                    //     if (value!.isEmpty ||
-                    //         !RegExp(r'^[+]*[(]{0,1}[0-9]{1-4}[)]{0,1}[-\s\./0-9]+$')
-                    //             .hasMatch(value)) {
-                    //       return "Enter Contact Number correctly";
-                    //     } else {
-                    //       return null;
-                    //     }
-                    //   },
-                    //   decoration: const InputDecoration(
-                    //     labelText: 'Contact Number',
-                    //   ),
-                    //   // onChanged: (val) {
-                    //   //   titleInput = val;
-                    //   // },
-                    //   // controller: _usernameController,
-                    //   // onSubmitted: (_) => _submitData(),
-                    // ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        errorText: provider.getEmailError(),
-                      ),
-                      onChanged: (value) =>
-                          context.read<SignUpProvider>().emailChanged(value),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        errorText: provider.getPasswordError(),
-                      ),
-                      onChanged: (value) =>
-                          context.read<SignUpProvider>().passwordChanged(value),
-                    ),
-                    const SizedBox(height: 20),
-                    if (provider.formzStatus.isSubmissionInProgress)
-                      const CircularProgressIndicator()
-                    else
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.only(
-                            top: 10.0,
-                            bottom: 10.0,
-                            left: 20.0,
-                            right: 20.0,
-                          ),
-                          backgroundColor: Theme.of(context).primaryColor,
-                        ),
-                        onPressed: provider.formzStatus.isInvalid
-                            ? null
-                            : () => context.read<SignUpProvider>().signUp(),
-                        child: const Text(
-                          'Signup',
-                          style: TextStyle(color: Colors.white),
+          return SingleChildScrollView(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 50),
+                      SizedBox(
+                        // height: constraints.maxHeight * 0.2,
+                        height: 140,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          // fit: BoxFit.cover,
                         ),
                       ),
-                    Row(
-                      children: [
-                        const SizedBox(height: 100),
-                        const Text("Already have an account? "),
-                        TextButton(
-                          child: const Text(
-                            "Login.",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                      const SizedBox(height: 50),
+                      // TextFormField(
+                      //   validator: (value) {
+                      //     if (value!.isEmpty ||
+                      //         !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      //       return "Enter Name correctly";
+                      //     } else {
+                      //       return null;
+                      //     }
+                      //   },
+                      //   decoration: const InputDecoration(
+                      //     labelText: 'Full Name',
+                      //   ),
+                      //   // onChanged: (val) {
+                      //   //   titleInput = val;
+                      //   // },
+                      //   // controller: _usernameController,
+                      //   // onSubmitted: (_) => _submitData(),
+                      // ),
+                      // TextFormField(
+                      //   validator: (value) {
+                      //     if (value!.isEmpty ||
+                      //         !RegExp(r'^[+]*[(]{0,1}[0-9]{1-4}[)]{0,1}[-\s\./0-9]+$')
+                      //             .hasMatch(value)) {
+                      //       return "Enter Contact Number correctly";
+                      //     } else {
+                      //       return null;
+                      //     }
+                      //   },
+                      //   decoration: const InputDecoration(
+                      //     labelText: 'Contact Number',
+                      //   ),
+                      //   // onChanged: (val) {
+                      //   //   titleInput = val;
+                      //   // },
+                      //   // controller: _usernameController,
+                      //   // onSubmitted: (_) => _submitData(),
+                      // ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          errorText: provider.getEmailError(),
+                        ),
+                        onChanged: (value) =>
+                            context.read<SignUpProvider>().emailChanged(value),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          errorText: provider.getPasswordError(),
+                        ),
+                        onChanged: (value) => context
+                            .read<SignUpProvider>()
+                            .passwordChanged(value),
+                      ),
+                      const SizedBox(height: 20),
+                      if (provider.formzStatus.isSubmissionInProgress)
+                        const CircularProgressIndicator()
+                      else
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.only(
+                              top: 10.0,
+                              bottom: 10.0,
+                              left: 20.0,
+                              right: 20.0,
                             ),
+                            backgroundColor: Theme.of(context).primaryColor,
                           ),
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LogInView(),
-                              ),
-                            );
-                          },
+                          onPressed: provider.formzStatus.isInvalid
+                              ? null
+                              : () => context.read<SignUpProvider>().signUp(),
+                          child: const Text(
+                            'Signup',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
+                      Row(
+                        children: [
+                          const SizedBox(height: 100),
+                          const Text("Already have an account? "),
+                          TextButton(
+                            child: const Text(
+                              "Login.",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LogInView(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           );
         },
       ),

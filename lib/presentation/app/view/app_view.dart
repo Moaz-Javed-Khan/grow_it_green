@@ -13,7 +13,6 @@ import 'package:grow_it_green/presentation/orders/provider/orders_provider.dart'
 import 'package:grow_it_green/presentation/orders/view/orders_view.dart';
 import 'package:grow_it_green/presentation/products/provider/products_provider.dart';
 import 'package:grow_it_green/presentation/products/view/product_detail_view.dart';
-import 'package:grow_it_green/presentation/products/view/products_overview_view.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -70,38 +69,58 @@ class _AppViewState extends State<AppView> {
   }
 
   void _onListen() {
-    switch (provider.onboardingStatus) {
-      case OnboardingStatus.onboarded:
+    if (provider.onboardingStatus == OnboardingStatus.notOnboarded) {
+      _navigator.pushAndRemoveUntil<void>(
+        Onboarding.route(),
+        (route) => false,
+      );
+    }
+    if (provider.onboardingStatus == OnboardingStatus.onboarded) {
+      if (provider.authStatus == AuthStatus.authenticated) {
+        _navigator.pushAndRemoveUntil<void>(
+          HomeView.route(),
+          (route) => false,
+        );
+      } else if (provider.authStatus == AuthStatus.unauthenticated) {
         _navigator.pushAndRemoveUntil<void>(
           LogInView.route(),
           (route) => false,
         );
-        break;
-      case OnboardingStatus.notOnboarded:
-        _navigator.pushAndRemoveUntil<void>(
-          Onboarding.route(),
-          (route) => false,
-        );
-        break;
-      case OnboardingStatus.unknown:
-        break;
+      }
     }
-    switch (provider.authStatus) {
-      case AuthStatus.authenticated:
-        _navigator.pushAndRemoveUntil<void>(
-          HomeScreen.route(),
-          (route) => false,
-        );
-        break;
-      case AuthStatus.unauthenticated:
-        _navigator.pushAndRemoveUntil<void>(
-          SignUpView.route(),
-          (route) => false,
-        );
-        break;
-      case AuthStatus.unknown:
-        break;
-    }
+
+    // switch (provider.authStatus) {
+    //   case AuthStatus.authenticated:
+    //     _navigator.pushAndRemoveUntil<void>(
+    //       HomeView.route(),
+    //       (route) => false,
+    //     );
+    //     break;
+    //   case AuthStatus.unauthenticated:
+    //     _navigator.pushAndRemoveUntil<void>(
+    //       SignUpView.route(),
+    //       (route) => false,
+    //     );
+    //     break;
+    //   case AuthStatus.unknown:
+    //     break;
+    // }
+    // switch (provider.onboardingStatus) {
+    //   case OnboardingStatus.onboarded:
+    //     _navigator.pushAndRemoveUntil<void>(
+    //       LogInView.route(),
+    //       (route) => false,
+    //     );
+    //     break;
+    //   case OnboardingStatus.notOnboarded:
+    //     _navigator.pushAndRemoveUntil<void>(
+    //       Onboarding.route(),
+    //       (route) => false,
+    //     );
+    //     break;
+    //   case OnboardingStatus.unknown:
+    //     break;
+    // }
   }
 
   @override
@@ -113,94 +132,39 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorKey: _navigatorKey,
-        theme: ThemeData(
-          primarySwatch: Colors.lightGreen,
-          accentColor: Color.fromARGB(255, 255, 255, 255),
-          // errorColor: Colors.red,
-          // fontFamily: 'Quicksand',
+      debugShowCheckedModeBanner: false,
+      navigatorKey: _navigatorKey,
+      theme: ThemeData(
+        primarySwatch: Colors.lightGreen,
+        accentColor: Color.fromARGB(255, 255, 255, 255),
+        // errorColor: Colors.red,
+        // fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              titleMedium: const TextStyle(
+                // fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              // button: TextStyle(color: Colors.white),
+            ),
+        appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 titleMedium: const TextStyle(
                   // fontFamily: 'OpenSans',
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-                // button: TextStyle(color: Colors.white),
               ),
-          appBarTheme: AppBarTheme(
-            textTheme: ThemeData.light().textTheme.copyWith(
-                  titleMedium: const TextStyle(
-                    // fontFamily: 'OpenSans',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-          ),
         ),
-        title: 'Grow It Green',
-        builder: (context, child) => child!,
-        onGenerateRoute: (settings) => SplashView.route(),
-        routes: {
-          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-          CartScreen.routeName: (ctx) => CartScreen(),
-          OrdersScreen.routeName: (ctx) => OrdersScreen(),
-        });
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  static Route route() =>
-      MaterialPageRoute(builder: (context) => const HomePage());
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Center(child: Text("Home")),
-        TextButton(
-          onPressed: () => context.read<AppProvider>().logout(),
-          child: const Text("Logout"),
-        ),
-      ],
+      ),
+      title: 'Grow It Green',
+      builder: (context, child) => child!,
+      onGenerateRoute: (settings) => SplashView.route(),
+      routes: {
+        ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+        CartScreen.routeName: (ctx) => CartScreen(),
+        OrdersScreen.routeName: (ctx) => OrdersScreen(),
+      },
     );
   }
 }
-
-// class LoginPage extends StatelessWidget {
-//   const LoginPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         const Center(child: Text("Login Here")),
-//         TextButton(
-//           onPressed: () => context.read<AppProvider>().login(),
-//           child: const Text("Login"),
-//         )
-//       ],
-//     );
-//   }
-// }
-
-// class Onboarding extends StatelessWidget {
-//   const Onboarding({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: Column(
-//         children: [
-//           const Text("Onboarding"),
-//           TextButton(
-//             onPressed: () => context.read<AppProvider>().onboardingCompleted(),
-//             child: const Text("Get Started"),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

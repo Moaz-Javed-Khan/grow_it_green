@@ -35,7 +35,7 @@ class APIClient {
   /// in the function.
   ///
   /// Same thing applies for the [header] parameter
-  Future<Map<String, dynamic>> get({
+  Future<dynamic> get({
     required String handle,
     String? baseUrl,
     Map<String, String>? kHeader,
@@ -66,7 +66,7 @@ class APIClient {
     }
 
     http.Response? rawResponse;
-    Map<String, dynamic> responseJson = {};
+    dynamic responseJson;
     try {
       rawResponse = await _client
           .get(
@@ -105,7 +105,7 @@ class APIClient {
   /// in the function.
   ///
   /// Same thing applies for the [header] parameter
-  Future<Map<String, dynamic>> post({
+  Future<dynamic> post({
     required String handle,
     dynamic body,
     String? baseUrl,
@@ -141,7 +141,7 @@ class APIClient {
     }
 
     http.Response? rawResponse;
-    Map<String, dynamic> responseJson = {};
+    dynamic responseJson;
     try {
       rawResponse = await _client
           .post(
@@ -181,7 +181,7 @@ class APIClient {
   /// in the function.
   ///
   /// Same thing applies for the [header] parameter
-  Future<Map<String, dynamic>?> postMultipart({
+  Future<dynamic> postMultipart({
     required String handle,
     required String fileField,
     required List<String> files,
@@ -219,7 +219,7 @@ class APIClient {
     }
 
     http.Response? rawResponse;
-    Map<String, dynamic> responseJson = {};
+    dynamic responseJson;
     try {
       final request = http.MultipartRequest('POST', uri);
 
@@ -274,7 +274,7 @@ class APIClient {
   /// in the function.
   ///
   /// Same thing applies for the [header] parameter
-  Future<Map<String, dynamic>?> patch({
+  Future<dynamic> patch({
     required String handle,
     dynamic body,
     String? baseUrl,
@@ -310,7 +310,7 @@ class APIClient {
     }
 
     http.Response? rawResponse;
-    Map<String, dynamic> responseJson = {};
+    dynamic responseJson;
     try {
       rawResponse = await _client
           .patch(
@@ -350,7 +350,7 @@ class APIClient {
   /// in the function.
   ///
   /// Same thing applies for the [header] parameter
-  Future<Map<String, dynamic>?> delete({
+  Future<dynamic> delete({
     required String handle,
     dynamic body,
     String? baseUrl,
@@ -386,7 +386,7 @@ class APIClient {
     }
 
     http.Response? rawResponse;
-    Map<String, dynamic> responseJson = {};
+    dynamic responseJson;
     try {
       rawResponse = await _client
           .delete(
@@ -426,7 +426,7 @@ class APIClient {
   /// in the function.
   ///
   /// Same thing applies for the [header] parameter
-  Future<Map<String, dynamic>?> put({
+  Future<dynamic> put({
     required String handle,
     dynamic body,
     String? baseUrl,
@@ -462,7 +462,7 @@ class APIClient {
     }
 
     http.Response? rawResponse;
-    Map<String, dynamic> responseJson = {};
+    dynamic responseJson;
     try {
       rawResponse = await _client
           .put(
@@ -488,11 +488,8 @@ class APIClient {
         );
       }
     }
-    if (responseJson['data'] != null) {
-      return responseJson['data'] as Map<String, dynamic>;
-    } else {
-      return responseJson;
-    }
+
+    return responseJson;
   }
 
   /// Used to convert a locally provided [json] String to json Map
@@ -524,18 +521,21 @@ class APIClient {
   }
 
   /// General HTTP code responses
-  Future<Map<String, dynamic>> _response(http.Response response) async {
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
-    final message = json['message'] == null
-        ? ((json['error'] as Map<String, dynamic>?)?['message'] as String?) ==
-                null
-            ? 'Unauthorized Request'
-            : (json['error'] as Map<String, dynamic>)['message'].toString()
-        : json['message'].toString();
+  Future<dynamic> _response(http.Response response) async {
+    final json = jsonDecode(response.body);
+    final message = json is Map
+        ? json['message'] == null
+            ? ((json['error'] as Map<String, dynamic>?)?['message']
+                        as String?) ==
+                    null
+                ? null
+                : (json['error'] as Map<String, dynamic>)['message'].toString()
+            : json['message'].toString()
+        : null;
     switch (response.statusCode) {
       case 200:
       case 201:
-        final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+        final responseJson = jsonDecode(response.body);
         return responseJson;
       case 400:
       case 422:

@@ -47,10 +47,7 @@ class _LogInViewState extends State<_LogInView> {
     if (provider.formzStatus == FormzStatus.submissionFailure) {
       context.errorSnackbar(provider.error ?? 'Something went wrong!');
     } else if (provider.formzStatus == FormzStatus.submissionSuccess) {
-      context.successSnackbar(
-        'Logged In Successfully.',
-      );
-      Navigator.pushReplacement(context, LogInView.route());
+      context.successSnackbar('Logged In Successfully.');
     }
   }
 
@@ -65,88 +62,97 @@ class _LogInViewState extends State<_LogInView> {
     return Scaffold(
       body: Consumer<LogInProvider>(
         builder: (context, provider, _) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              return Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Image.asset(
-                      'assets/images/logo.png',
-                      fit: BoxFit.cover,
-                      height: constraints.maxHeight * 0.2,
-                    ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        errorText: provider.getEmailError(),
+          return SingleChildScrollView(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 50,
                       ),
-                      onChanged: (value) =>
-                          context.read<LogInProvider>().emailChanged(value),
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        errorText: provider.getPasswordError(),
-                      ),
-                      obscureText: true,
-                      onChanged: (value) =>
-                          context.read<LogInProvider>().passwordChanged(value),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.only(
-                          top: 10.0,
-                          bottom: 10.0,
-                          left: 20.0,
-                          right: 20.0,
+                      SizedBox(
+                        // height: constraints.maxHeight * 0.2,
+                        height: 150,
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          // fit: BoxFit.cover,
                         ),
-                        backgroundColor: Theme.of(context).primaryColor,
                       ),
-                      onPressed: provider.formzStatus.isInvalid
-                          ? null
-                          : () => context.read<LogInProvider>().logIn(),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: Colors.white),
+                      const SizedBox(
+                        height: 70,
                       ),
-                    ),
-                    Row(
-                      children: [
-                        const SizedBox(height: 100),
-                        const Text("Don't Have an account "),
-                        TextButton(
-                          child: const Text(
-                            "Signup.",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          errorText: provider.getEmailError(),
+                        ),
+                        onChanged: (value) =>
+                            context.read<LogInProvider>().emailChanged(value),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          errorText: provider.getPasswordError(),
+                        ),
+                        obscureText: true,
+                        onChanged: (value) => context
+                            .read<LogInProvider>()
+                            .passwordChanged(value),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      if (provider.formzStatus.isSubmissionInProgress)
+                        const CircularProgressIndicator()
+                      else
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.only(
+                              top: 10.0,
+                              bottom: 10.0,
+                              left: 20.0,
+                              right: 20.0,
                             ),
+                            backgroundColor: Theme.of(context).primaryColor,
                           ),
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SignUpView(),
-                              ),
-                            );
-                          },
+                          onPressed: !provider.formzStatus.isValidated
+                              ? null
+                              : () => context.read<LogInProvider>().logIn(),
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
+                      Row(
+                        children: [
+                          const SizedBox(height: 100),
+                          const Text("Don't Have an account "),
+                          TextButton(
+                            child: const Text(
+                              "Signup.",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignUpView(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           );
         },
       ),

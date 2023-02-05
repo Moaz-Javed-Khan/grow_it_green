@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   formz: ^0.4.1
   http: ^0.13.5
+  intl: ^0.18.0
   provider: ^6.0.5
 
 dev_dependencies:
@@ -25,5 +26,24 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-assets:
-  - assets/images/
+  assets:
+    - assets/images/
+    # - assets/images/products/
+    # - assets/images/services/
+    # - assets/images/encyclopedias/
+
+  # assets:
+  #   - assets/images/logo.png
+  #   - assets/images/onboarding1.png
+  #   - assets/images/onboarding2.png
+  #   - assets/images/onboarding3.png
+  #   - assets/images/man.png
+  #   - assets/images/products/1.png
+  #   - assets/images/products/2.png
+  #   - assets/images/products/3.png
+  #   - assets/images/services/1.png
+  #   - assets/images/services/2.png
+  #   - assets/images/services/3.png
+  #   - assets/images/encyclopedias/1.png
+  #   - assets/images/encyclopedias/2.png
+  #   - assets/images/encyclopedias/3.png

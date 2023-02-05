@@ -44,13 +44,12 @@ class APIState<T> extends Equatable {
   bool get isFailure => state.isFailure;
 
   bool get isEmpty {
-    return data == null ||
-        (data is List && ((data as List?)?.isEmpty ?? false));
+    return data == null || (data is List && ((data! as List).isEmpty));
   }
 
   bool get isNotEmpty => !isEmpty;
 
-  bool get hasError => error?.isNotEmpty ?? false;
+  bool get hasError => error != null;
 
   APIState<T> toInitial() => copyWith(state: APICallState.initial);
 

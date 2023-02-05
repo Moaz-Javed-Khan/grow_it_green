@@ -18,7 +18,6 @@ class APIStateWidget<T> extends StatelessWidget {
     this.initialWidget,
     this.loadingWidget,
     this.failureWidget,
-    this.retryText,
   });
 
   final APIState<T> apiState;
@@ -30,7 +29,6 @@ class APIStateWidget<T> extends StatelessWidget {
   final Widget? loadingWidget;
   final Widget? initialWidget;
   final String emptyErrorMessage;
-  final String? retryText;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +53,6 @@ class APIStateWidget<T> extends StatelessWidget {
         AppError(
           message: apiState.error ?? errorMessage ?? '',
           retry: onRetry,
-          retryText: retryText,
         );
   }
 

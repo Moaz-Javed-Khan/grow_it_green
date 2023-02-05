@@ -104,16 +104,16 @@ class _OnboardingState extends State<Onboarding> {
                   ),
                 ),
                 onPressed: () {
-                  context.read<AppProvider>().onboardingCompleted();
                   if (currentIndex == contents.length - 1) {
-                    Navigator.push(
-                      context,
-                      // MaterialPageRoute(builder: (_) => const HomeScreen()),
-                      MaterialPageRoute(builder: (_) => const SignUpView()),
-                    );
+                    context.read<AppProvider>().onboardingCompleted();
+                    // Navigator.push(
+                    //   context,
+                    //   // MaterialPageRoute(builder: (_) => const HomeScreen()),
+                    //   MaterialPageRoute(builder: (_) => const SignUpView()),
+                    // );
                   }
                   _controller.nextPage(
-                    duration: const Duration(seconds: 1),
+                    duration: const Duration(milliseconds: 120),
                     curve: Curves.linear,
                   );
                 },
