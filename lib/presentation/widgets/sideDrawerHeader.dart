@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SideDrawerHeader extends StatefulWidget {
-  const SideDrawerHeader({Key? key}) : super(key: key);
+  const SideDrawerHeader({super.key});
 
   @override
   _SideDrawerHeaderState createState() => _SideDrawerHeaderState();

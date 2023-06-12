@@ -6,7 +6,7 @@ import 'package:grow_it_green/presentation/orders/view/orders_view.dart';
 import 'package:provider/provider.dart';
 
 class SideDrawerList extends StatefulWidget {
-  const SideDrawerList({Key? key}) : super(key: key);
+  const SideDrawerList({super.key});
 
   @override
   State<SideDrawerList> createState() => _SideDrawerListState();

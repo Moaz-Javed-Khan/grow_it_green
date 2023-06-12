@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './product.dart';
+import 'package:grow_it_green/presentation/products/provider/product.dart';
 
 class ProductsProvider with ChangeNotifier {
   // ignore: prefer_final_fields

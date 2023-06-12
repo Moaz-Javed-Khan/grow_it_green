@@ -9,7 +9,7 @@ class CartItemWidget extends StatelessWidget {
   final int quantity;
   final String title;
 
-  CartItemWidget(
+  const CartItemWidget(
     this.id,
     this.productId,
     this.price,
@@ -56,7 +56,7 @@ class CartItemWidget extends StatelessWidget {
               ),
             ),
             title: Text(title),
-            subtitle: Text('Total: Rs.${(price * quantity)}'),
+            subtitle: Text('Total: Rs.${price * quantity}'),
             trailing: Text('$quantity x'),
           ),
         ),

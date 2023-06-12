@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/presentation/app/provider/app_provider.dart';
 import 'package:grow_it_green/presentation/app/view/onboardingContent.dart';
-import 'package:grow_it_green/presentation/auth/sign_up/view/sign_up_view.dart';
 import 'package:provider/provider.dart';
 
 class Onboarding extends StatefulWidget {
@@ -78,11 +77,12 @@ class _OnboardingState extends State<Onboarding> {
           ),
           Container(
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  contents.length,
-                  (index) => buildDot(index, currentIndex, context),
-                )),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                contents.length,
+                (index) => buildDot(index, currentIndex, context),
+              ),
+            ),
           ),
           Container(
             height: 60,

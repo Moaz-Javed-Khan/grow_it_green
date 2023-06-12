@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:grow_it_green/domain/auth_repository/repository.dart';
-import 'package:grow_it_green/presentation/auth/log_in/log_in.dart';
 import 'package:grow_it_green/presentation/auth/log_in/provider/log_in_provider.dart';
 import 'package:grow_it_green/presentation/auth/sign_up/sign_up.dart';
 import 'package:grow_it_green/presentation/utils/widgets/snackbars.dart';
-import 'package:grow_it_green/presentation/app/provider/app_provider.dart';
 import 'package:provider/provider.dart';
 
 class LogInView extends StatelessWidget {

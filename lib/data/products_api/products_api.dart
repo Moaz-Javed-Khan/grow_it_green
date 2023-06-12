@@ -12,7 +12,8 @@ class ProductApiImpl extends ProductApi {
     final response =
         await _client.get(handle: ProductEndpoints.products, enableLogs: true);
 
-    return (response as List)
+    return (response as Map)
+        .values
         .map((e) => ProductEntity.fromJson(e as Map<String, dynamic>))
         .toList();
   }

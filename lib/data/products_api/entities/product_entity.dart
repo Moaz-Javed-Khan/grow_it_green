@@ -11,10 +11,10 @@ class ProductEntity extends Equatable {
 
   factory ProductEntity.fromJson(Map<String, dynamic> json) {
     return ProductEntity(
-      id: json['id'] as int,
+      id: int.parse(json['id'] as String),
       name: json['name'] as String?,
       image: json['image'] as String?,
-      price: json['price'] as num?,
+      price: num.tryParse(json['price'] as String),
       description: json['description'] as String?,
     );
   }

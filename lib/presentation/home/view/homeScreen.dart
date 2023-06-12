@@ -3,7 +3,9 @@ import 'package:grow_it_green/data/helpers/api_client.dart';
 import 'package:grow_it_green/data/products_api/api.dart';
 import 'package:grow_it_green/domain/products_repository/repository.dart';
 import 'package:grow_it_green/presentation/home/provider/home_provider.dart';
+import 'package:grow_it_green/presentation/plant_encyclopedia/view/plant_encyclopedia_overview_view.dart';
 import 'package:grow_it_green/presentation/products/view/products_overview_view.dart';
+import 'package:grow_it_green/presentation/services/view/services_overview_view.dart';
 import 'package:grow_it_green/presentation/utils/widgets/api_state_widgets/api_state_widget.dart';
 import 'package:grow_it_green/presentation/widgets/horizontal_card_list_widget.dart';
 import 'package:grow_it_green/presentation/widgets/sideDrawerHeader.dart';
@@ -91,6 +93,38 @@ class ProductCardList extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => ProductsOverviewScreen(),
+              ),
+            );
+          },
+        ),
+        HorizontalCardList(
+          listCards: products
+              .map((e) => ListCard(image: e.image, title: e.name))
+              .toList(),
+        ),
+        HorizontalCardListHeader(
+          title: 'Services',
+          onPressedMore: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ServicesOverviewView(),
+              ),
+            );
+          },
+        ),
+        HorizontalCardList(
+          listCards: products
+              .map((e) => ListCard(image: e.image, title: e.name))
+              .toList(),
+        ),
+        HorizontalCardListHeader(
+          title: 'Plant Encyclopedia',
+          onPressedMore: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PlantEncyclopediaOverviewView(),
               ),
             );
           },

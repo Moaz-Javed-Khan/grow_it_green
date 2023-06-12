@@ -5,7 +5,6 @@ import 'package:grow_it_green/presentation/app/provider/app_provider.dart';
 import 'package:grow_it_green/presentation/app/view/onboarding.dart';
 import 'package:grow_it_green/presentation/app/view/splash_view.dart';
 import 'package:grow_it_green/presentation/auth/log_in/view/log_in_view.dart';
-import 'package:grow_it_green/presentation/auth/sign_up/sign_up.dart';
 import 'package:grow_it_green/presentation/cart/provider/cart_provider.dart';
 import 'package:grow_it_green/presentation/cart/view/cart_view.dart';
 import 'package:grow_it_green/presentation/home/view/homeScreen.dart';
@@ -136,7 +135,7 @@ class _AppViewState extends State<AppView> {
       navigatorKey: _navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
-        accentColor: Color.fromARGB(255, 255, 255, 255),
+        accentColor: const Color.fromARGB(255, 255, 255, 255),
         // errorColor: Colors.red,
         // fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(

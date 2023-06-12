@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/presentation/products/provider/products_provider.dart';
+import 'package:grow_it_green/presentation/widgets/product_item.dart';
 import 'package:provider/provider.dart';
-
-import './product_item.dart';
 
 class ProductsGrid extends StatelessWidget {
   final bool showFavs;
 
-  ProductsGrid(this.showFavs);
+  const ProductsGrid(this.showFavs);
 
   @override
   Widget build(BuildContext context) {

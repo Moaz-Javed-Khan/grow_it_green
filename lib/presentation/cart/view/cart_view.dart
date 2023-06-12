@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grow_it_green/presentation/cart/provider/cart_provider.dart'
     show CartProvider;
 import 'package:grow_it_green/presentation/orders/provider/orders_provider.dart';
+import 'package:grow_it_green/presentation/thankYouView.dart';
 import 'package:grow_it_green/presentation/widgets/cart_item_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -47,6 +48,12 @@ class CartScreen extends StatelessWidget {
                         cart.totalAmount,
                       );
                       cart.clear();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ThankYouView(),
+                        ),
+                      );
                     },
                     child: const Text('ORDER NOW'),
                   )

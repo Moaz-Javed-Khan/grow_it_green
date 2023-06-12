@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grow_it_green/domain/products_repository/models/product_model.dart';
 import 'package:grow_it_green/presentation/cart/provider/cart_provider.dart';
 import 'package:grow_it_green/presentation/cart/view/cart_view.dart';
 import 'package:grow_it_green/presentation/widgets/badge.dart';
@@ -48,12 +47,12 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             ),
             itemBuilder: (_) => [
               const PopupMenuItem(
-                child: Text('Only Favorites'),
                 value: FilterOptions.Favorites,
+                child: Text('Only Favorites'),
               ),
               const PopupMenuItem(
-                child: Text('Show All'),
                 value: FilterOptions.All,
+                child: Text('Show All'),
               ),
             ],
           ),
