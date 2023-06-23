@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:grow_it_green/domain/services_repository/models/service_model.dart';
 import 'package:grow_it_green/presentation/thankYouView.dart';
 
 class ServiceDetailView extends StatefulWidget {
-  const ServiceDetailView({super.key});
+  const ServiceDetailView({super.key, required this.service});
+
+  final Service service;
 
   @override
   State<ServiceDetailView> createState() => _ServiceDetailViewState();
@@ -16,29 +19,29 @@ class _ServiceDetailViewState extends State<ServiceDetailView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Name"),
+        title: Text(widget.service.name),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              "assets/images/services/3.png",
+            Image.network(
+              widget.service.image!,
               width: double.infinity,
               height: 250,
               fit: BoxFit.cover,
             ),
             const SizedBox(height: 20),
-            const Text(
-              "Name",
-              style: TextStyle(
+            Text(
+              widget.service.name,
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
             ),
             const SizedBox(height: 6),
-            const Text("Description Description Description Description."),
+            Text(widget.service.description),
             const SizedBox(height: 20),
             Text(
               "Service Date: ${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",

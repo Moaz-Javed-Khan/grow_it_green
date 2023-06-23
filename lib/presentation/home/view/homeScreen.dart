@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/data/helpers/api_client.dart';
+import 'package:grow_it_green/data/plant_encyclopedias_api/api.dart';
 import 'package:grow_it_green/data/products_api/api.dart';
+import 'package:grow_it_green/data/services_api/api.dart';
+import 'package:grow_it_green/domain/plant_encyclopedias_repository/repository.dart';
 import 'package:grow_it_green/domain/products_repository/repository.dart';
+import 'package:grow_it_green/domain/services_repository/repository.dart';
 import 'package:grow_it_green/presentation/home/provider/home_provider.dart';
 import 'package:grow_it_green/presentation/plant_encyclopedia/view/plant_encyclopedia_overview_view.dart';
 import 'package:grow_it_green/presentation/products/view/products_overview_view.dart';
@@ -24,9 +28,24 @@ class HomeView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => HomeProvider(
         productRepository: ProductsRepositoryImpl(
-          productApi: ProductApiImpl(client: context.read<APIClient>()),
+          productApi: ProductApiImpl(
+            client: context.read<APIClient>(),
+          ),
         ),
-      )..getProducts(),
+        serviceRepository: ServicesRepositoryImpl(
+          serviceApi: ServiceApiImpl(
+            client: context.read<APIClient>(),
+          ),
+        ),
+        plantEncyclopediaRepository: PlantEncyclopediasRepositoryImpl(
+          plantEncyclopediaApi: PlantEncyclopediaApiImpl(
+            client: context.read<APIClient>(),
+          ),
+        ),
+      )
+        ..getProducts()
+        ..getServices()
+        ..getPlantEncyclopedia(),
       child: const HomeScreen(),
     );
   }
@@ -65,6 +84,13 @@ class HomeScreen extends StatelessWidget {
                   ProductCardList(
                     products: provider.productsState.data ?? [],
                   ),
+                  ServiceCardList(
+                    services: provider.servicesState.data ?? [],
+                  ),
+                  PlantEncyclopediaCardList(
+                    plantEncyclopedias:
+                        provider.plantEncyclopediasState.data ?? [],
+                  ),
                   // ServiceSlider(),
                   // EncyclopediaSlider(),
                 ],
@@ -102,35 +128,67 @@ class ProductCardList extends StatelessWidget {
               .map((e) => ListCard(image: e.image, title: e.name))
               .toList(),
         ),
+      ],
+    );
+  }
+}
+
+class ServiceCardList extends StatelessWidget {
+  const ServiceCardList({super.key, required this.services});
+
+  final List<Service> services;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         HorizontalCardListHeader(
           title: 'Services',
           onPressedMore: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ServicesOverviewView(),
+                builder: (context) => ServicesOverviewView(
+                  services: services,
+                ),
               ),
             );
           },
         ),
         HorizontalCardList(
-          listCards: products
+          listCards: services
               .map((e) => ListCard(image: e.image, title: e.name))
               .toList(),
         ),
+      ],
+    );
+  }
+}
+
+class PlantEncyclopediaCardList extends StatelessWidget {
+  const PlantEncyclopediaCardList(
+      {super.key, required this.plantEncyclopedias});
+
+  final List<PlantEncyclopedia> plantEncyclopedias;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         HorizontalCardListHeader(
           title: 'Plant Encyclopedia',
           onPressedMore: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PlantEncyclopediaOverviewView(),
+                builder: (context) => PlantEncyclopediaOverviewView(
+                    plantEncyclopedia: plantEncyclopedias),
               ),
             );
           },
         ),
         HorizontalCardList(
-          listCards: products
+          listCards: plantEncyclopedias
               .map((e) => ListCard(image: e.image, title: e.name))
               .toList(),
         )

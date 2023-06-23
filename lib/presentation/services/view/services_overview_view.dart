@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:grow_it_green/presentation/services/view/service_detail_view.dart';
-import 'package:grow_it_green/presentation/widgets/service_item_widget.dart';
+import 'package:grow_it_green/domain/services_repository/models/service_model.dart';
+import 'package:grow_it_green/presentation/widgets/services_grid.dart';
 
 class ServicesOverviewView extends StatefulWidget {
-  const ServicesOverviewView({super.key});
+  const ServicesOverviewView({super.key, required this.services});
+
+  final List<Service> services;
 
   @override
   State<ServicesOverviewView> createState() => ServicesOverviewViewState();
@@ -18,17 +20,7 @@ class ServicesOverviewViewState extends State<ServicesOverviewView> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ServiceDetailView(),
-              ),
-            );
-          },
-          child: const ServiceItemWidget(),
-        ),
+        child: ServicesGrid(services: widget.services),
       ),
     );
   }

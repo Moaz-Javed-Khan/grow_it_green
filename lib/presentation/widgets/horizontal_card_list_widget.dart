@@ -73,7 +73,7 @@ class ListCard extends StatelessWidget {
         child: Column(
           children: [
             if (image != null)
-              Image.network(image!, height: 120, width: 125, fit: BoxFit.cover)
+              Image.network(image!, height: 125, width: 130, fit: BoxFit.cover)
             else
               const Icon(Icons.image, size: 48),
             const SizedBox(height: 2),
@@ -81,7 +81,7 @@ class ListCard extends StatelessWidget {
               title,
               style: const TextStyle(
                 color: Color.fromARGB(255, 0, 0, 0),
-                letterSpacing: 2,
+                // letterSpacing: 2,
               ),
             )
           ],
