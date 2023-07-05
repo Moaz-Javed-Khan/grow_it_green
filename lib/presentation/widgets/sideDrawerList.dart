@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/presentation/app/provider/app_provider.dart';
 import 'package:grow_it_green/presentation/orders/view/orders_view.dart';
+import 'package:grow_it_green/presentation/widgets/my_account.dart';
 import 'package:provider/provider.dart';
 
 class SideDrawerList extends StatefulWidget {
@@ -31,7 +32,12 @@ class _SideDrawerListState extends State<SideDrawerList> {
         ListTile(
           title: const Text('My Account'),
           onTap: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MyAccount(),
+              ),
+            );
           },
           leading: const Icon(Icons.account_box_rounded),
           // trailing: Icon(Icons.exit_to_app_outlined)

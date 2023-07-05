@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "315339585215",
+    "firebase_url": "https://grow-it-green-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "grow-it-green",
+    "storage_bucket": "grow-it-green.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315339585215:android:5b023d45460e5cb97fb80a",
+        "android_client_info": {
+          "package_name": "com.example.grow_it_green"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315339585215-i28196bctiq6tkllce3ekpbo4uc6mle7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJMSnpyTxzFArY6SuI3MYMr1XdF6CwD_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315339585215-i28196bctiq6tkllce3ekpbo4uc6mle7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

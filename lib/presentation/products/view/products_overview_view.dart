@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grow_it_green/domain/products_repository/models/product_model.dart';
 import 'package:grow_it_green/presentation/cart/provider/cart_provider.dart';
 import 'package:grow_it_green/presentation/cart/view/cart_view.dart';
+import 'package:grow_it_green/presentation/products/provider/products_provider.dart';
 import 'package:grow_it_green/presentation/widgets/badge.dart';
 import 'package:grow_it_green/presentation/widgets/products_grid.dart';
 
@@ -12,6 +14,10 @@ enum FilterOptions {
 }
 
 class ProductsOverviewScreen extends StatefulWidget {
+  const ProductsOverviewScreen({required this.products});
+
+  final List<Product> products;
+
   // List<Product> products;
 
   // ProductsOverviewScreen(this.products);
@@ -24,10 +30,10 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
-  // late List<Product> products;
 
   @override
   Widget build(BuildContext context) {
+    print("product page");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Shop'),
@@ -73,7 +79,10 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ),
         ],
       ),
-      body: ProductsGrid(_showOnlyFavorites),
+      body: ProductsGrid(
+        products: widget.products,
+        showFavs: _showOnlyFavorites,
+      ),
     );
   }
 }

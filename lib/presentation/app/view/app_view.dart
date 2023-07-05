@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/data/helpers/api_client.dart';
+import 'package:grow_it_green/data/products_api/api.dart';
 import 'package:grow_it_green/domain/auth_repository/repository.dart';
+import 'package:grow_it_green/domain/products_repository/repository.dart';
 import 'package:grow_it_green/presentation/app/provider/app_provider.dart';
 import 'package:grow_it_green/presentation/app/view/onboarding.dart';
 import 'package:grow_it_green/presentation/app/view/splash_view.dart';
@@ -24,15 +26,20 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final apiClient = APIClient(authRepository: _authRepository);
     return MultiProvider(
       providers: [
         Provider(create: (_) => _authRepository),
-        Provider(create: (_) => APIClient(authRepository: _authRepository)),
+        Provider(create: (_) => apiClient),
         ChangeNotifierProvider(
           create: (_) => AppProvider(authRepository: _authRepository),
         ),
         ChangeNotifierProvider.value(
-          value: ProductsProvider(),
+          value: ProductsProvider(
+            productsRepository: ProductsRepositoryImpl(
+              productApi: ProductApiImpl(client: apiClient),
+            ),
+          ),
         ),
         ChangeNotifierProvider.value(
           value: CartProvider(),

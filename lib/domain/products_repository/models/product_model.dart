@@ -2,12 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:grow_it_green/data/products_api/entities/product_entity.dart';
 
 class Product extends Equatable {
-  const Product({
+  Product({
     required this.id,
     required this.name,
     this.image,
     this.price,
     required this.description,
+    required this.isFavorite,
   });
 
   factory Product.fromEntity(ProductEntity entity) {
@@ -17,6 +18,7 @@ class Product extends Equatable {
       image: entity.image,
       price: entity.price,
       description: entity.description ?? 'Unavailable',
+      isFavorite: entity.isFavorite ?? false,
     );
   }
 
@@ -25,6 +27,11 @@ class Product extends Equatable {
   final String? image;
   final num? price;
   final String description;
+  bool isFavorite;
+
+  void toggleFavoriteStatus() {
+    isFavorite = !isFavorite;
+  }
 
   @override
   List<Object?> get props => [

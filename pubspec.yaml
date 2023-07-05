@@ -10,6 +10,8 @@ dependencies:
   cache:
     path: packages/cache
   equatable: ^2.0.5
+  firebase_core: ^2.9.0
+  firebase_database: ^10.1.0
   flutter:
     sdk: flutter
   formz: ^0.4.1

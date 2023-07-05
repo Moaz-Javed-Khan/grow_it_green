@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grow_it_green/domain/products_repository/models/models.dart';
 import 'package:grow_it_green/presentation/cart/provider/cart_provider.dart';
 import 'package:grow_it_green/presentation/products/provider/product.dart';
+import 'package:grow_it_green/presentation/products/provider/products_provider.dart';
 import 'package:grow_it_green/presentation/products/view/product_detail_view.dart';
 import 'package:provider/provider.dart';
 
@@ -11,28 +13,30 @@ class ProductItem extends StatelessWidget {
 
   // ProductItem(this.id, this.title, this.imageUrl);
 
+  final Product product;
+
+  const ProductItem({super.key, required this.product});
+
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<CartProvider>(context, listen: false);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: Consumer<Product>(
-            builder: (ctx, product, _) => IconButton(
-              icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border,
-              ),
-              color: Theme.of(context).accentColor,
-              onPressed: () {
-                product.toggleFavoriteStatus();
-              },
+          leading: IconButton(
+            icon: Icon(
+              product.isFavorite ? Icons.favorite : Icons.favorite_border,
             ),
+            color: Theme.of(context).accentColor,
+            onPressed: () {
+              product.toggleFavoriteStatus();
+            },
           ),
           title: Text(
-            product.title,
+            product.name,
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
@@ -40,7 +44,11 @@ class ProductItem extends StatelessWidget {
               Icons.shopping_cart,
             ),
             onPressed: () {
-              cart.addItem(product.id, product.price, product.title);
+              cart.addItem(
+                product.id.toString(),
+                product.price!,
+                product.name,
+              );
             },
             color: Theme.of(context).accentColor,
           ),
@@ -53,7 +61,7 @@ class ProductItem extends StatelessWidget {
             );
           },
           child: Image.network(
-            product.imageUrl,
+            product.image!,
             fit: BoxFit.cover,
           ),
         ),

@@ -1,8 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/presentation/cart/provider/cart_provider.dart'
     show CartProvider;
+import 'package:grow_it_green/presentation/cart/view/check_out_product_view.dart';
 import 'package:grow_it_green/presentation/orders/provider/orders_provider.dart';
-import 'package:grow_it_green/presentation/thankYouView.dart';
 import 'package:grow_it_green/presentation/widgets/cart_item_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -41,19 +42,24 @@ class CartScreen extends StatelessWidget {
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       Provider.of<OrdersProvider>(context, listen: false)
                           .addOrder(
                         cart.items.values.toList(),
                         cart.totalAmount,
                       );
-                      cart.clear();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ThankYouView(),
+                          builder: (context) => const CheckOutProductView(),
                         ),
                       );
+                      // print(
+                      //   cart.items.values.map((e) => e.toJson()).toList(),
+                      // );
+                      // print(cart.itemCount);
+                      // print(cart.items);
+                      // print(cart.totalAmount);
                     },
                     child: const Text('ORDER NOW'),
                   )
@@ -66,14 +72,14 @@ class CartScreen extends StatelessWidget {
             child: ListView.builder(
               itemCount: cart.items.length,
               itemBuilder: (ctx, i) => CartItemWidget(
-                cart.items.values.toList()[i].id,
-                cart.items.keys.toList()[i],
-                cart.items.values.toList()[i].price,
-                cart.items.values.toList()[i].quantity,
-                cart.items.values.toList()[i].title,
+                id: cart.items.values.toList()[i].id,
+                price: cart.items.values.toList()[i].price,
+                productId: cart.items.keys.toList()[i],
+                quantity: cart.items.values.toList()[i].quantity,
+                title: cart.items.values.toList()[i].title,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -42,7 +42,7 @@ class ServiceItemWidget extends StatelessWidget {
                     Text(
                       service.name,
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -53,13 +53,13 @@ class ServiceItemWidget extends StatelessWidget {
                         const Text(
                           "First Hour Rate: ",
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 13,
                           ),
                         ),
                         Text(
                           service.initialPrice.toString(),
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 13,
                           ),
                         ),
                       ],
@@ -70,13 +70,13 @@ class ServiceItemWidget extends StatelessWidget {
                         const Text(
                           "Per Hour Rate: ",
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 13,
                           ),
                         ),
                         Text(
                           service.perHourRate.toString(),
                           style: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 13,
                           ),
                         ),
                       ],
@@ -97,7 +97,7 @@ class ServiceItemWidget extends StatelessWidget {
                   "Book This Service",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 15,
+                    fontSize: 13,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

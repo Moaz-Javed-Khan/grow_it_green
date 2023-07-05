@@ -4,7 +4,7 @@ class CartItem {
   final String id;
   final String title;
   final int quantity;
-  final double price;
+  final num price;
 
   CartItem({
     required this.id,
@@ -12,6 +12,15 @@ class CartItem {
     required this.quantity,
     required this.price,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'quantity': quantity,
+      'price': price,
+    };
+  }
 }
 
 class CartProvider with ChangeNotifier {
@@ -35,7 +44,7 @@ class CartProvider with ChangeNotifier {
 
   void addItem(
     String productId,
-    double price,
+    num price,
     String title,
   ) {
     if (_items.containsKey(productId)) {

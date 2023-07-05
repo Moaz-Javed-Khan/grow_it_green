@@ -8,6 +8,7 @@ import 'package:grow_it_green/domain/products_repository/repository.dart';
 import 'package:grow_it_green/domain/services_repository/repository.dart';
 import 'package:grow_it_green/presentation/home/provider/home_provider.dart';
 import 'package:grow_it_green/presentation/plant_encyclopedia/view/plant_encyclopedia_overview_view.dart';
+import 'package:grow_it_green/presentation/products/provider/products_provider.dart';
 import 'package:grow_it_green/presentation/products/view/products_overview_view.dart';
 import 'package:grow_it_green/presentation/services/view/services_overview_view.dart';
 import 'package:grow_it_green/presentation/utils/widgets/api_state_widgets/api_state_widget.dart';
@@ -76,6 +77,10 @@ class HomeScreen extends StatelessWidget {
           return APIStateWidget(
             apiState: provider.productsState,
             emptyErrorMessage: "Not available",
+            onSuccessState: () {
+              Provider.of<ProductsProvider>(context).items =
+                  provider.productsState.data ?? [];
+            },
             successWidget: Padding(
               padding: const EdgeInsets.only(left: 4, right: 4),
               child: Column(
@@ -118,7 +123,9 @@ class ProductCardList extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductsOverviewScreen(),
+                builder: (context) => ProductsOverviewScreen(
+                  products: products,
+                ),
               ),
             );
           },
@@ -182,7 +189,8 @@ class PlantEncyclopediaCardList extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => PlantEncyclopediaOverviewView(
-                    plantEncyclopedia: plantEncyclopedias),
+                  plantEncyclopedia: plantEncyclopedias,
+                ),
               ),
             );
           },

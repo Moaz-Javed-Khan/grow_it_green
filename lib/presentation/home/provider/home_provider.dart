@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:grow_it_green/_common/helpers/custom_exception.dart';
 import 'package:grow_it_green/domain/plant_encyclopedias_repository/repository.dart';
 import 'package:grow_it_green/domain/products_repository/repository.dart';
 import 'package:grow_it_green/domain/services_repository/repository.dart';
@@ -26,14 +27,14 @@ class HomeProvider with ChangeNotifier {
     productsState = productsState.toLoading();
     notifyListeners();
 
-    // try {
-    final response = await _productRepository.getProducts();
-    productsState = productsState.toLoaded(data: response);
-    // } on CustomException catch (e) {
-    //   productsState = productsState.toFailure(e.message);
-    // } catch (e) {
-    //   productsState = productsState.toFailure('Something went wrong!');
-    // }
+    try {
+      final response = await _productRepository.getProducts();
+      productsState = productsState.toLoaded(data: response);
+    } on CustomException catch (e) {
+      productsState = productsState.toFailure(e.message);
+    } catch (e) {
+      productsState = productsState.toFailure('Something went wrong!');
+    }
 
     notifyListeners();
   }
@@ -42,8 +43,14 @@ class HomeProvider with ChangeNotifier {
     servicesState = servicesState.toLoading();
     notifyListeners();
 
-    final response = await _serviceRepository.getServices();
-    servicesState = servicesState.toLoaded(data: response);
+    try {
+      final response = await _serviceRepository.getServices();
+      servicesState = servicesState.toLoaded(data: response);
+    } on CustomException catch (e) {
+      servicesState = servicesState.toFailure(e.message);
+    } catch (e) {
+      servicesState = servicesState.toFailure('Something went wrong!');
+    }
 
     notifyListeners();
   }
@@ -52,8 +59,17 @@ class HomeProvider with ChangeNotifier {
     plantEncyclopediasState = plantEncyclopediasState.toLoading();
     notifyListeners();
 
-    final response = await _plantEncyclopediaRepository.getPlantEncyclopedias();
-    plantEncyclopediasState = plantEncyclopediasState.toLoaded(data: response);
+    try {
+      final response =
+          await _plantEncyclopediaRepository.getPlantEncyclopedias();
+      plantEncyclopediasState =
+          plantEncyclopediasState.toLoaded(data: response);
+    } on CustomException catch (e) {
+      plantEncyclopediasState = plantEncyclopediasState.toFailure(e.message);
+    } catch (e) {
+      plantEncyclopediasState =
+          plantEncyclopediasState.toFailure('Something went wrong!');
+    }
 
     notifyListeners();
   }
