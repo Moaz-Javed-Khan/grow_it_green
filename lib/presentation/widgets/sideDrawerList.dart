@@ -52,7 +52,6 @@ class _SideDrawerListState extends State<SideDrawerList> {
                 builder: (context) => BookedServicesScreen(),
               ),
             );
-            // Navigator.of(context).pushNamed(BookedServicesScreen.routeName);
           },
           leading: const Icon(Icons.work_history),
           // trailing: Icon(Icons.exit_to_app_outlined)

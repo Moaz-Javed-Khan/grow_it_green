@@ -21,14 +21,17 @@ class _OrderItemState extends State<BookedServiceItem> {
       child: Column(
         children: <Widget>[
           ListTile(
-            title: Text('Rs.${widget.bookedService.name}'),
+            title: Text(widget.bookedService.name),
             subtitle: Text('Rs.${widget.bookedService.price}'),
-            trailing: Row(
-              children: [
-                Text(widget.bookedService.date),
-                const SizedBox(width: 10),
-                Text(widget.bookedService.time),
-              ],
+            trailing: SizedBox(
+              width: 200,
+              child: Row(
+                children: [
+                  Text(widget.bookedService.date),
+                  const SizedBox(width: 10),
+                  Text(widget.bookedService.time),
+                ],
+              ),
             ),
           ),
         ],

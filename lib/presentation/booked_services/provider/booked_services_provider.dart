@@ -17,18 +17,23 @@ class BookedServices {
 }
 
 class BookedServicesProvider with ChangeNotifier {
-  List<BookedServices> _booked_services = [];
+  final List<BookedServices> _bookedServices = [];
 
-  List<BookedServices> get booked_services {
-    return [..._booked_services];
+  List<BookedServices> get bookedServices {
+    return [..._bookedServices];
   }
 
   void addBookedService(
-      String id, String name, num price, String date, String time) {
-    _booked_services.insert(
+    String id,
+    String name,
+    num price,
+    String date,
+    String time,
+  ) {
+    _bookedServices.insert(
       0,
       BookedServices(
-        id: DateTime.now().toString(),
+        id: id,
         name: name,
         price: price,
         date: date,

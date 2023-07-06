@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grow_it_green/domain/auth_repository/repository.dart';
+import 'package:provider/provider.dart';
 
 class SideDrawerHeader extends StatefulWidget {
   const SideDrawerHeader({super.key});
@@ -10,6 +12,8 @@ class SideDrawerHeader extends StatefulWidget {
 class _SideDrawerHeaderState extends State<SideDrawerHeader> {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AuthRepository>(context).currentUser;
+
     return Container(
       color: Colors.green[700],
       width: double.infinity,
@@ -29,9 +33,9 @@ class _SideDrawerHeaderState extends State<SideDrawerHeader> {
             ),
           ),
           const SizedBox(height: 10),
-          const Text(
-            "moaz@test.com",
-            style: TextStyle(
+          Text(
+            user.email!,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
             ),

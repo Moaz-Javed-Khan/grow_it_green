@@ -26,7 +26,7 @@ class _ServiceDetailViewState extends State<ServiceDetailView> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
                 widget.service.image!,
@@ -126,7 +126,24 @@ class _ServiceDetailViewState extends State<ServiceDetailView> {
                       ),
                     );
                   },
-                  child: const Text("Book"),
+                  child: SizedBox(
+                    width: 80,
+                    child: Row(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        const Text(
+                          "Book",
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        const Icon(
+                          Icons.check,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],
