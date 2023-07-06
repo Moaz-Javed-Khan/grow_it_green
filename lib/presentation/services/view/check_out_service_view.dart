@@ -1,7 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/domain/services_repository/models/service_model.dart';
+import 'package:grow_it_green/presentation/booked_services/provider/booked_services_provider.dart';
 import 'package:grow_it_green/presentation/thank_you_view.dart';
+import 'package:provider/provider.dart';
 // import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class CheckOutServiceView extends StatefulWidget {
@@ -221,6 +223,18 @@ class _CheckOutServiceViewState extends State<CheckOutServiceView> {
                     if (_formKey.currentState!.validate()) {
                       String id =
                           DateTime.now().millisecondsSinceEpoch.toString();
+
+                      Provider.of<BookedServicesProvider>(
+                        context,
+                        listen: false,
+                      ).addBookedService(
+                        id,
+                        widget.service.name,
+                        widget.service.initialPrice!,
+                        widget.serviceDate,
+                        widget.startTime,
+                      );
+
                       dataBaseRef.child(id).set({
                         'id': id,
                         'name': widget.service.name,

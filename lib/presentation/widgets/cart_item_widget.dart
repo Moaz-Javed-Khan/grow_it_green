@@ -22,21 +22,11 @@ class CartItemWidget extends StatefulWidget {
 }
 
 class _CartItemWidgetState extends State<CartItemWidget> {
-  quantityIncrement() {
-    setState(() {
-      widget.quantity += 1;
-    });
-  }
-
-  quantityDecrement() {
-    if (widget.quantity <= 1) return;
-    setState(() {
-      widget.quantity -= 1;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    print("id: ${widget.id}");
+    print("Product id: ${widget.productId}");
+    final cart = Provider.of<CartProvider>(context);
     return Dismissible(
       key: ValueKey(widget.id),
       background: Container(
@@ -78,23 +68,57 @@ class _CartItemWidgetState extends State<CartItemWidget> {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Total: Rs.${widget.price * widget.quantity}'),
+                Text(
+                  'Total: Rs.${widget.price * widget.quantity}',
+                  style: const TextStyle(fontSize: 16),
+                ),
                 const SizedBox(height: 10),
                 Row(
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    const SizedBox(width: 40),
+                    const Text("Quantity"),
+                    const SizedBox(width: 20),
                     InkWell(
-                      onTap: quantityIncrement,
+                      onTap: () => {
+                        cart.incrementQuantity(widget.productId),
+                        setState(() {}),
+                        print(
+                          "after increment Quantity: ${cart.itemQuantity(widget.productId)}",
+                        ),
+                      },
                       child: const CircleAvatar(
                         child: Icon(Icons.add),
                       ),
                     ),
                     const SizedBox(width: 10),
-                    const Text("Quantity"),
+                    Text(
+                      '${cart.itemQuantity(widget.productId)} x',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                     const SizedBox(width: 10),
                     InkWell(
-                      onTap: quantityDecrement,
+                      onTap: () => {
+                        if (cart.itemQuantity(widget.productId)! <= 1)
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                duration: Duration(milliseconds: 200),
+                                content: Text(
+                                  "Can't Decrement! Swipe to remove Item",
+                                ),
+                              ),
+                            )
+                          }
+                        else
+                          {
+                            cart.decrementQuantity(widget.productId),
+                            setState(() {}),
+                            print(
+                              "after decrement Quantity: ${cart.itemQuantity(widget.productId)}",
+                            ),
+                          }
+                      },
+                      // quantityDecrement,
                       child: const CircleAvatar(
                         child: Icon(Icons.remove),
                       ),
@@ -104,7 +128,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 const SizedBox(height: 6),
               ],
             ),
-            trailing: Text('${widget.quantity} x'),
+            // trailing: Text('${cart.itemQuantity(widget.productId)} x'),
           ),
         ),
       ),

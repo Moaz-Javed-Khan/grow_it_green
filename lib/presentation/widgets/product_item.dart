@@ -44,8 +44,10 @@ class ProductItem extends StatelessWidget {
               Icons.shopping_cart,
             ),
             onPressed: () {
+              print("item added id: ${product.id.toString()}");
               cart.addItem(
-                product.id.toString(),
+                product.id.toString(), //for increment of existing product
+                product.id.toString(), //for new product
                 product.price!,
                 product.name,
               );

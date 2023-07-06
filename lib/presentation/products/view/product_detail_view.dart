@@ -65,7 +65,9 @@ class ProductDetailScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   cart.addItem(
-                    loadedProduct.id.toString(),
+                    loadedProduct.id
+                        .toString(), //for increment of existing product
+                    loadedProduct.id.toString(), //for new product
                     loadedProduct.price!,
                     loadedProduct.name,
                   );

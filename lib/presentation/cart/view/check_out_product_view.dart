@@ -205,10 +205,11 @@ class _CheckOutProductViewState extends State<CheckOutProductView> {
                         'totalItems': cart.itemCount.toString(),
                         'total': cart.totalAmount.toString(),
                       }).then((value) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("Product Ordered"),
-                        ));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Product Ordered"),
+                          ),
+                        );
                         cart.clear();
                         Navigator.push(
                           context,

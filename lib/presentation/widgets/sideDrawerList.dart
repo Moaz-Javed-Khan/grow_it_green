@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:grow_it_green/presentation/app/provider/app_provider.dart';
+import 'package:grow_it_green/presentation/booked_services/view/booked_services_view.dart';
 import 'package:grow_it_green/presentation/orders/view/orders_view.dart';
 import 'package:grow_it_green/presentation/widgets/my_account.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,13 @@ class _SideDrawerListState extends State<SideDrawerList> {
         ListTile(
           title: const Text('Services History'),
           onTap: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BookedServicesScreen(),
+              ),
+            );
+            // Navigator.of(context).pushNamed(BookedServicesScreen.routeName);
           },
           leading: const Icon(Icons.work_history),
           // trailing: Icon(Icons.exit_to_app_outlined)

@@ -28,25 +28,12 @@ class _SideDrawerHeaderState extends State<SideDrawerHeader> {
               ),
             ),
           ),
+          const SizedBox(height: 10),
           const Text(
-            "Rock Dwayne Johnson",
+            "moaz@test.com",
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
-            ),
-          ),
-          Text(
-            "03495861794",
-            style: TextStyle(
-              color: Colors.grey[100],
-              fontSize: 16,
-            ),
-          ),
-          Text(
-            "rock@gmail.com",
-            style: TextStyle(
-              color: Colors.grey[200],
-              fontSize: 14,
             ),
           ),
         ],

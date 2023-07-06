@@ -33,7 +33,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("product page");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Shop'),

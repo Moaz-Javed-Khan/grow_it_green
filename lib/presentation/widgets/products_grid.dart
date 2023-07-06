@@ -16,9 +16,6 @@ class ProductsGrid extends StatelessWidget {
     final productsData = Provider.of<ProductsProvider>(context);
     // final products = showFavs ? productsData.favoriteItems : productsData.items;
 
-    // productsData.getItems();
-
-    print("Products::: ");
     print(products);
 
     return GridView.builder(
